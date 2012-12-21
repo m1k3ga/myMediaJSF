@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:h="http://java.sun.com/jsf/html">
+<head>
+    <title>Abspiellisten</title>
+</head>
+<body>
+    <h:panelGrid id="grid" columns="2">
+        <h:outputText value="Willkomen"/>
+        <h:outputText value="#{login.username}"/>
+        <h:outputText value="Kennwort:"/>
+        <h:outputText value="#{login.password}"/>
+        <h:outputText value="Name der Abspielliste:"/>
+        <h:outputText value="#{playlist.playlistName}"/>
+    </h:panelGrid>
+
+<h:form id="playlist">
+<h:dataTable var="plitem" value="#{playlist.playlistItems}">
+  <h:column><f:facet name="header"><h:outputText value="Nr."/></f:facet><h:outputText value="#{plitem.position}"/></h:column>
+  <h:column><f:facet name="header"><h:outputText value="Titel"/></f:facet><h:outputText value="#{plitem.mediafile.title}"/></h:column>
+  <h:column><f:facet name="header"><h:outputText value="Interpret"/></f:facet><h:outputText value="#{plitem.mediafile.artist}"/></h:column>
+  <h:column><f:facet name="header"><h:outputText value="Album"/></f:facet><h:outputText value="#{plitem.mediafile.album}"/></h:column>
+  <h:column><f:facet name="header"><h:outputText value="Genre"/></f:facet><h:outputText value="#{plitem.mediafile.genre}"/></h:column>
+  <h:column><f:facet name="header"><h:outputText value="Aktionen"/></f:facet>
+    <h:commandButton action="#{playlist.deletePlaylistItem}" value="Entfernen">
+      <f:setPropertyActionListener target="#{playlist.pliIdToDelete}" value="#{plitem.mediafile.id}"/>
+    </h:commandButton>
+  </h:column>
+</h:dataTable>
+</h:form>
+
+</body>
+</html>
